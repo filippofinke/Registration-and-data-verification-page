@@ -1,13 +1,12 @@
 <?php
-
 /**
- * CsvParser
+ * CsvManager
  * Classe che permette la gestione di file csv.
  *
  * @author Filippo Finke
  * @version 26.09.2018
  */
-class CsvParser {
+class CsvManager {
 
     /**
      * Il percorso del file da gestire.
@@ -15,12 +14,18 @@ class CsvParser {
     private $path;
 
     /**
+     * Separatore del file csv.
+     */
+    private $delimiter;
+
+    /**
      * Metodo costruttore con 1 parametro.
      *
      * @param $path Il file da gestire.
      */
-    function __construct($path) {
+    function __construct($path, $delimiter) {
         $this->path = $path;
+        $this->delimiter = $delimiter;
     }
 
     /**
@@ -31,11 +36,11 @@ class CsvParser {
      */
     function writeLine($line)
     {
-        $file = $this->file;
+        $file = $this->path;
         if(is_writable($file) && file_exists($file))
         {
-            $f = fopen($file,'w');
-            $var = fputcsv($file,$line);
+            $f = fopen($file,'a');
+            $var = fputcsv($f,$line,$this->delimiter);
             fclose($f);
             return $var;
         }
@@ -48,6 +53,20 @@ class CsvParser {
      */
     function readAll()
     {
-        $file = $this->file;
+        $file = $this->path;
+        if(is_readable($file) && file_exists($file))
+        {
+            $csvArray = [];
+            if (($f = fopen($file,'r')) !== FALSE)
+            {
+                while (($data = fgetcsv($f, 1000, $this->delimiter)) !== FALSE)
+                {
+                    $csvArray[] = $data;
+                }
+                fclose($f);
+            }
+            return $csvArray;
+        }
+        return false;
     }
 }
