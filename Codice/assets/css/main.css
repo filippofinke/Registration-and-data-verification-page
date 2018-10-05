@@ -1,0 +1,74 @@
+body {
+  background-image: linear-gradient(to bottom, white,#e0e0e0);
+}
+
+.required {
+  color:red;
+}
+
+.footer {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #efefef;
+  text-align: center;
+}
+
+.nav-wrapper {
+  background-color: white;
+}
+
+.brand-logo {
+  color: black !important;
+}
+
+.carousel .carousel-item
+{
+  width:300px !important;
+}
+
+.btn-color {
+  background-color: white;
+  color: black;
+}
+
+.btn-color:hover {
+  background-color: lightgray;
+  color: black;
+}
+
+#mainPage {
+  diplay: none;
+  position: relative;
+}
+
+#preloader {
+  text-align: center;
+  margin-top: 30%;
+}
+
+.preloader-size {
+  width: 200px;
+  height: 200px;
+}
+
+textarea {
+  height: 70px;
+  broder-top: none;
+}
+
+.separator {
+  height: 50px;
+}
+
+.datepicker-date-display {
+  background-color: orange;
+}
+
+.wordcounter {
+  float: right;
+  font-size: 12px;
+  height: 1px;
+}
