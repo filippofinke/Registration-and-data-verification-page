@@ -117,10 +117,9 @@ class Validator {
 	*/
 	public function general($string)
 	{
-		if(strlen($string) <= 50)
+		if(strlen($string) <= 50 && ctype_alpha($string))
 		{
-			if(ctype_alpha($string))
-				return $this->basic($string);
+		    return $this->basic($string);
 		}
 		return false;
 	}
@@ -130,10 +129,9 @@ class Validator {
 	*/
 	public function street($string)
 	{
-		if(strlen($string) >= 2 && strlen($string) <= 4)
+		if(strlen($string) >= 1 && strlen($string) <= 4 && ctype_alnum($string))
 		{
-			if(ctype_alnum($string))
-				return true;
+			return true;
 		}
 		return false;
 	}
@@ -143,10 +141,9 @@ class Validator {
 	*/
 	public function email($string)
 	{
-		if($this->basic($string))
+		if($this->basic($string) && filter_var($string, FILTER_VALIDATE_EMAIL))
 		{
-			if(filter_var($string, FILTER_VALIDATE_EMAIL))
-				return true;
+			return true;
 		}
 		return false;
 	}

@@ -65,23 +65,21 @@
         <div class="row">
           <div class="input-field col s6">
             <i class="material-icons prefix">people</i>
-            <input id="first_name" type="text" class="" required>
-            <label for="first_name">Nome<b class="required">*</b></label>
+            <input id="name" type="text" required>
+            <label for="name">Nome<b class="required">*</b></label>
             <span class="character-counter wordcounter" >0/50</span>
-
           </div>
           <div class="input-field col s6">
-            <input id="last_name" type="text" class="" required>
-            <label for="last_name">Cognome<b class="required">*</b></label>
+            <input id="lastname" type="text" required>
+            <label for="lastname">Cognome<b class="required">*</b></label>
             <span class="character-counter wordcounter" >0/50</span>
-
           </div>
         </div>
         <div class="row">
           <div class="input-field col s6">
             <i class="material-icons prefix">date_range</i>
-            <input id="birth_date" type="text" class="" required>
-            <label for="birth_date">Data di nascita<b class="required">*</b></label>
+            <input id="birthdate" type="text" class="" required>
+            <label for="birthdate">Data di nascita<b class="required">*</b></label>
           </div>
           <div class="input-field col s3">
             <label style="margin-top: -25px;">Genere<b class="required">*</b></label>
@@ -102,10 +100,11 @@
             <i class="material-icons prefix">location_on</i>
             <input id="street" type="text" class="" required>
             <label for="street">Via<b class="required">*</b></label>
+            <span class="character-counter wordcounter" >0/50</span>
           </div>
           <div class="input-field col s4">
-            <input id="civic_number" type="text" class="" required>
-            <label for="civic_number">Numero civico<b class="required">*</b></label>
+            <input id="civicnumber" type="text" class="" required>
+            <label for="civicnumber">Numero civico<b class="required">*</b></label>
             <span class="character-counter wordcounter" >0/4</span>
 
           </div>
@@ -140,7 +139,7 @@
         <div class="row">
           <div class="input-field col s12">
             <i class="material-icons prefix">edit</i>
-            <textarea id="hobby" class=" materialize-textarea" required></textarea>
+            <textarea id="hobby" class=" materialize-textarea"></textarea>
             <label for="hobby">Hobby</label>
             <span class="character-counter wordcounter" >0/500</span>
           </div>
@@ -148,19 +147,19 @@
         <div class="row">
           <div class="input-field col s12">
             <i class="material-icons prefix">assignment_ind</i>
-            <textarea id="occupation" class="materialize-textarea" required></textarea>
+            <textarea id="occupation" class="materialize-textarea"></textarea>
             <label for="occupation">Professione</label>
             <span class="character-counter wordcounter" >0/500</span>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s6">
-            <button class="btn btn-large btn-register waves-effect waves-light btn-color">Cancella
+            <button class="btn btn-large btn-register waves-effect waves-light btn-color" type="reset">Cancella
               <i class="material-icons left">cancel</i>
             </button>
           </div>
           <div class="input-field col s6">
-            <button class="btn btn-large btn-register waves-effect waves-light btn-color">Avanti
+            <button id="submitButton" class="btn btn-large btn-register waves-effect waves-light btn-color">Avanti
               <i class="material-icons left">send</i>
             </button>
           </div>
@@ -175,6 +174,7 @@
   <script type="text/javascript" src="assets/js/jquery-3.3.1.min.js"></script>
   <script type="text/javascript" src="assets/js/materialize.min.js"></script>
   <script type="text/javascript" src="assets/js/main.js"></script>
+  <script type="text/javascript" src="assets/js/validator.js"></script>
   <script type="text/javascript" src="assets/js/registrazione.js"></script>
 
 </script>
