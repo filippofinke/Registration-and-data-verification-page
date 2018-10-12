@@ -31,22 +31,16 @@ var Validator = class Validator {
         if (string.trim() == "") {
             return false;
         }
-        var tempstring = encodeURI(string);
-        if (tempstring != string) {
-            return false;
+        if (this.containChar(string, this.delimiter)) {
+            return false
         }
         else {
-            if (this.containChar(string, this.delimiter)) {
-                return false
-            }
-            else {
-                this.disabledCharsAtStart.forEach(function (char) {
-                    if (string.startsWith(char)) {
-                        return false;
-                    }
-                });
-                return true;
-            }
+            this.disabledCharsAtStart.forEach(function (char) {
+                if (string.startsWith(char)) {
+                    return false;
+                }
+            });
+            return true;
         }
     }
 
@@ -122,7 +116,7 @@ var Validator = class Validator {
      * @returns {boolean} {boolean} True se la stringa è valida.
      */
     general(string) {
-        if (string.length <= 50 && /^[a-zA-Z]+$/.test(string)) {
+        if (string.length <= 50 && /^[a-zA-ZÀ-ÿ\u00f1\u00d1\s]*$/g.test(string)) {
             return this.basic(string);
         }
         return false;

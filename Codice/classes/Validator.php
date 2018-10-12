@@ -19,7 +19,7 @@ class Validator {
 	private $disabledCharsAtStart = array("@","+","=","-");
 
 	/**
-	* Metodo che permette di controllare se un 
+	* Metodo che permette di controllare se un
 	* carattere sia contenuto in una stringa.
 	*/
 	public function containChar($string, $char)
@@ -31,7 +31,7 @@ class Validator {
 	}
 
 	/**
-	* Metodo che permette di controllare se un 
+	* Metodo che permette di controllare se un
 	* stringa inizia con un determinato carattere.
 	*/
 	public function startsWith($string, $char)
@@ -117,7 +117,7 @@ class Validator {
 	*/
 	public function general($string)
 	{
-		if(strlen($string) <= 50 && ctype_alpha($string))
+		if(strlen($string) <= 50 && preg_match("/^[a-zA-ZÀ-ÿ\x{00f1}\x{00d1}\s]*$/u", $string))
 		{
 		    return $this->basic($string);
 		}

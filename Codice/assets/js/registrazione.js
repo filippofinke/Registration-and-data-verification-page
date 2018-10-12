@@ -1,99 +1,224 @@
 var validator = new Validator();
+var datepicker;
+$(document).ready(function() {
+  $("#preloader").css("display", "none");
+  $("#mainPage").css("display", "block");
 
-$(document).ready(function(){
+
   $('#birthdate').datepicker({
-    yearRange: 30
+    yearRange: 30,
+    format: "yyyy-mm-dd"
   });
-  addCharCounter($('#name'),50);
-  addCharCounter($('#lastname'),50);
-  addCharCounter($('#street'),50);
-  addCharCounter($('#civicnumber'),4);
-  addCharCounter($('#nap'),5);
-  addCharCounter($('#city'),50);
-  addCharCounter($('#hobby'),500);
-  addCharCounter($('#occupation'),500);
+  datepicker = M.Datepicker.getInstance($('#birthdate'));
+
+  addCharCounter($('#name'), 50);
+  addCharCounter($('#lastname'), 50);
+  addCharCounter($('#street'), 50);
+  addCharCounter($('#civicnumber'), 4);
+  addCharCounter($('#nap'), 5);
+  addCharCounter($('#city'), 50);
+  addCharCounter($('#hobby'), 500);
+  addCharCounter($('#occupation'), 500);
+  $("#birthdate").focus(function() {
+    datepicker.open();
+  });
 
   $('#submitButton').click(submitCheck);
-  $('#name').keydown(validateGeneral).keyup(validateGeneral);
-  $('#lastname').keydown(validateGeneral).keyup(validateGeneral);
-  $('#street').keydown(validateGeneral).keyup(validateGeneral);
-  $('#city').keydown(validateGeneral).keyup(validateGeneral);
-  $('#civicnumber').keydown(validateCivicNumber).keyup(validateCivicNumber);
-  $('#nap').keydown(validateNap).keyup(validateNap);
-  $('#telephone').keydown(validatePhone).keyup(validatePhone);
-  $('#email').keydown(validateEmail).keyup(validateEmail);
-  $('#hobby').keydown(validateTextArea).keyup(validateTextArea);
-  $('#occupation').keydown(validateTextArea).keyup(validateTextArea);
+  $('#resetButton').click(resetForm);
+  $('#name').keydown(validateGeneral).keyup(validateGeneral).change(validateGeneral);
+  $('#lastname').keydown(validateGeneral).keyup(validateGeneral).change(validateGeneral);
+  $('#street').keydown(validateGeneral).keyup(validateGeneral).change(validateGeneral);
+  $('#city').keydown(validateGeneral).keyup(validateGeneral).change(validateGeneral);
+  $('#civicnumber').keydown(validateCivicNumber).keyup(validateCivicNumber).change(validateCivicNumber);
+  $('#nap').keydown(validateNap).keyup(validateNap).change(validateNap);
+  $('#telephone').keydown(validatePhone).keyup(validatePhone).change(validatePhone);
+  $('#email').keydown(validateEmail).keyup(validateEmail).change(validateEmail);
+  $('#hobby').keydown(validateTextArea).keyup(validateTextArea).change(validateTextArea);
+  $('#occupation').keydown(validateTextArea).keyup(validateTextArea).change(validateTextArea);
+  $('#birthdate').keydown(validateBirthDate).keyup(validateBirthDate).change(validateBirthDate);
 });
 
-function submitCheck()
+function resetForm(event)
 {
-  alert("A");
+  event.preventDefault();
+  var formelements = document.getElementById("reg-form").elements;
+  for (i = 0; i < formelements.length; i++)
+  {
+      type = formelements[i].type.toLowerCase();
+      switch (type)
+      {
+      case "text":
+      case "textarea":
+      case "tel":
+      case "email":
+      case "number":
+          formelements[i].value = "";
+          break;
+      case "radio":
+      case "checkbox":
+          if (formelements[i].checked)
+          {
+              formelements[i].checked = false;
+          }
+          break;
+      default:
+          break;
+      }
+  }
 }
 
-function changeColor(value, event)
-{
-  if(value)
-  {
+function submitCheck(event) {
+  event.preventDefault();
+  var filled = true;
+  var name = validator.general($('#name').val());
+  var lastname = validator.general($('#lastname').val());
+  var street = validator.general($('#street').val());
+  var city = validator.general($('#city').val());
+  var civicnumber = validator.street($('#civicnumber').val());
+  var nap = validator.nap($('#nap').val());
+  var telephone = validator.telephone($('#telephone').val());
+  var email = validator.email($('#email').val());
+  var hobby = validator.textArea($('#hobby').val());
+  var occupation = validator.textArea($('#occupation').val());
+  var gender = $("input[name='gender']:checked").val();
+  var birthdate = validator.birthDate($('#birthdate').val());
+
+  if (!name) {
+    $('#name').css("border-color", "red");
+    filled = false;
+    $.notify("Inserisci un nome valido!","error");
+  }
+
+  if (!lastname) {
+    $('#lastname').css("border-color", "red");
+    filled = false;
+    $.notify("Inserisci un cognome valido!","error");
+  }
+
+  if (!birthdate) {
+    $('#birthdate').css("border-color", "red");
+    filled = false;
+    $.notify("Inserisci una data di nascita valida!","error");
+  }
+
+  if (!gender) {
+    filled = false;
+    $.notify("Seleziona un genere!","error");
+  }
+
+  if (!street) {
+    $('#street').css("border-color", "red");
+    filled = false;
+    $.notify("Inserisci una via valida!","error");
+  }
+
+  if (!civicnumber) {
+    $('#civicnumber').css("border-color", "red");
+    filled = false;
+    $.notify("Inserisci un numero civico valido!","error");
+  }
+
+  if (!nap) {
+    $('#nap').css("border-color", "red");
+    filled = false;
+    $.notify("Inserisci un nap valido!","error");
+  }
+
+  if (!city) {
+    $('#city').css("border-color", "red");
+    filled = false;
+    $.notify("Inserisci una città valida!","error");
+  }
+
+  if (!telephone) {
+    $('#telephone').css("border-color", "red");
+    filled = false;
+    $.notify("Inserisci un numero di telefono valido!","error");
+  }
+
+  if (!email) {
+    $('#email').css("border-color", "red");
+    filled = false;
+    $.notify("Inserisci un'email valida!","error");
+  }
+
+  if (!hobby && $('#hobby').val().length > 0) {
+    $('#hobby').css("border-color", "red");
+    filled = false;
+    $.notify("Inserisci una descrizione del tuo hobby valida!","error");
+  }
+
+  if (!occupation && $('#occupation').val().length > 0) {
+    $('#occupation').css("border-color", "red");
+    filled = false;
+    $.notify("Inserisci una descrizione del tuo lavoro valida!","error");
+  }
+
+  if (filled) {
+    document.getElementById("reg-form").submit();
+  }
+}
+
+function changeColor(value, event) {
+  event.target.value = event.target.value.replace(/ +(?= )/g, '');
+
+  event.target.style.borderColor = "gray";
+
+  if (value) {
     event.target.style.color = "black";
-  }
-  else
-  {
+    event.target.style.borderColor = "#33cc33";
+  } else {
     event.target.style.color = "red";
+    event.target.style.borderColor = "red";
   }
 }
 
-function validateTextArea(event)
-{
+function validateBirthDate(event) {
+  changeColor(validator.birthDate(event.target.value), event);
+}
+
+function validateTextArea(event) {
   changeColor(validator.textArea(event.target.value), event);
 }
 
-function validateEmail(event)
-{
+function validateEmail(event) {
   changeColor(validator.email(event.target.value), event);
 }
 
-function validatePhone(event)
-{
+function validatePhone(event) {
   changeColor(validator.telephone(event.target.value), event);
 }
 
-function validateNap(event)
-{
+function validateNap(event) {
   changeColor(validator.nap(event.target.value), event);
 }
 
-function validateCivicNumber(event)
-{
+function validateCivicNumber(event) {
   event.target.value = event.target.value.toUpperCase();
   changeColor(validator.street(event.target.value), event);
 }
 
-function validateGeneral(event)
-{
+function validateGeneral(event) {
   changeColor(validator.general(event.target.value), event);
 }
 
-function addCharCounter(element,limit)
-{
+function addCharCounter(element, limit) {
+  charCounter(element, limit);
   element.keydown(function() {
-    charCounter(element,limit);
+    charCounter(element, limit);
   });
   element.keyup(function() {
-    charCounter(element,limit);
+    charCounter(element, limit);
   });
 }
 
-function charCounter(element, limit)
-{
+function charCounter(element, limit) {
   var textLength = element.val().length;
   var counter = element.parent().children('span');
-  if(textLength > limit)
-  {
-    counter.css("color","red");
-  }
-  else {
-    counter.css("color","black");
+  if (textLength > limit) {
+    counter.css("color", "red");
+  } else {
+    counter.css("color", "black");
   }
   counter.html(textLength + "/" + limit);
 }

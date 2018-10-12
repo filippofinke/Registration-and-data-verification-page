@@ -1,5 +1,8 @@
 body {
   background-image: linear-gradient(to bottom, white,#e0e0e0);
+  background-repeat: no-repeat;
+  background-color: #e0e0e0;
+
 }
 
 .required {
@@ -18,10 +21,16 @@ body {
 
 .nav-wrapper {
   background-color: white;
+  text-align: center;
 }
 
 .brand-logo {
+  left: 0 !important;
+  transform: 0 !important;
   color: black !important;
+  position: relative !important;
+  padding: 0px;
+  margin: 0px;
 }
 
 .carousel .carousel-item
@@ -71,4 +80,16 @@ textarea {
   float: right;
   font-size: 12px;
   height: 1px;
+}
+
+th {
+  text-align: center;
+}
+
+td {
+  text-align: left;
+}
+
+button:focus {
+  background-color: #efefef !important;
 }
