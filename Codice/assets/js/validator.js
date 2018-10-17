@@ -28,7 +28,7 @@ var Validator = class Validator {
      * @returns {boolean} True se la stringa è valida.
      */
     basic(string) {
-        if (string.trim() == "") {
+        if (string.trim() == "" || string.trim() != string) {
             return false;
         }
         if (this.containChar(string, this.delimiter)) {

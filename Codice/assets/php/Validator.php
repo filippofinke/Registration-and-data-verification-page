@@ -45,14 +45,14 @@ class Validator {
 	*/
 	public function basic($string)
 	{
-		if(empty(trim($string)))
+		if(empty(trim($string)) || trim($string) != $string)
 			return false;
 		$tempstring = filter_var($string, FILTER_SANITIZE_STRING);
 		if($tempstring != $string)
 			return false;
 		else
 		{
-			if($this->containChar($string,$this->csvSeparator))
+			if($this->containChar($string,$this->delimeter))
 				return false;
 			else
 			{

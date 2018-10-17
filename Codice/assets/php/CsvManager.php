@@ -37,10 +37,34 @@ class CsvManager {
     function writeLine($line)
     {
         $file = $this->path;
+        if(!file_exists($file))
+        {
+            $f = fopen($file,'w');
+            $csvline = "";
+            $x = 0;
+            foreach($line as $key => $data)
+            {
+                if($x != 0)
+                    $csvline .= $this->delimiter;
+                $csvline .= $key;
+                $x++;
+            }
+            fwrite($f, $csvline."\n");
+            fclose($f);
+        }
         if(is_writable($file) && file_exists($file))
         {
             $f = fopen($file,'a');
-            $var = fputcsv($f,$line,$this->delimiter);
+            $csvline = "";
+            $x = 0;
+            foreach($line as $data)
+            {
+                if($x != 0)
+                    $csvline .= $this->delimiter;
+                $csvline .= $data;
+                $x++;
+            }
+            $var = fwrite($f, $csvline."\n");
             fclose($f);
             return $var;
         }

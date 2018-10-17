@@ -39,7 +39,6 @@ function checkEmpties (...$data){
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link type="text/css" rel="stylesheet" href="assets/css/materialize.min.css"/>
   <link type="text/css" rel="stylesheet" href="assets/css/main.css"/>
   <title>Filippo Finke</title>
@@ -213,7 +212,15 @@ function checkEmpties (...$data){
   <script type="text/javascript" src="assets/js/notify.min.js"></script>
   <script type="text/javascript" src="assets/js/validator.js"></script>
   <script type="text/javascript" src="assets/js/registrazione.js"></script>
-
-</script>
+  <?php
+  if(isset($_POST["errors"]))
+  {
+      $errors = $_POST["errors"];
+      foreach ($errors as $error)
+      {
+          echo '<script>$.notify("'.htmlspecialchars($error).'", "error");</script>';
+      }
+  }
+  ?>
 </body>
 </html>
