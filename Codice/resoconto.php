@@ -1,30 +1,45 @@
 <?php
+session_start();
 require_once 'assets/php/CsvManager.php';
 require_once 'assets/php/Validator.php';
 
-if ($_SERVER["REQUEST_METHOD"] != "POST")
+
+define("PATH",'Registrazioni');
+$globalFile = 'Registrazioni_tutte.csv';
+$dailyFile = 'Registrazione_' . date("Y") . '-' . date("m") . '-' . date("d") . '.csv';
+
+$filled = false;
+if(isset($_SESSION["filled"]))
+{
+    session_destroy();
+    $filled = true;
+}
+else if ($_SERVER["REQUEST_METHOD"] != "POST") {
     header("Location: registrazione.php");
+    exit();
+}
 
-$v = new Validator();
+if(!$filled) {
+    $v = new Validator();
 
-$errors = array();
-$_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+    $errors = array();
+    $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-$name = $_POST["name"];
-$lastname = $_POST["lastname"];
-$birthdate = $_POST["birthdate"];
-$gender = $_POST["gender"];
-$street = $_POST["street"];
-$civicnumber = $_POST["civicnumber"];
-$nap = $_POST["nap"];
-$city = $_POST["city"];
-$telephone = $_POST["telephone"];
-$email = $_POST["email"];
-$hobby = $_POST["hobby"];
-$occupation = $_POST["occupation"];
+    $name = $_POST["name"];
+    $lastname = $_POST["lastname"];
+    $birthdate = $_POST["birthdate"];
+    $gender = $_POST["gender"];
+    $street = $_POST["street"];
+    $civicnumber = $_POST["civicnumber"];
+    $nap = $_POST["nap"];
+    $city = $_POST["city"];
+    $telephone = $_POST["telephone"];
+    $email = $_POST["email"];
+    $hobby = $_POST["hobby"];
+    $occupation = $_POST["occupation"];
 
-$dataArray = array(
-        'date' => date("Y m d H:i:s"),
+    $dataArray = array(
+        'date' => date("Y-m-d H:i:s"),
         'name' => $name,
         'lastname' => $lastname,
         'birthdate' => $birthdate,
@@ -33,63 +48,62 @@ $dataArray = array(
         'civicnumber' => $civicnumber,
         'nap' => $nap,
         'city' => $city,
-        'telephone' => str_replace("+","",$telephone),
+        'telephone' => str_replace("+", "", $telephone),
         'email' => $email,
         'hobby' => $hobby,
         'occupation' => $occupation
-);
+    );
 
-checkEmpties($name, $lastname, $birthdate, $gender, $street, $civicnumber, $nap, $city, $telephone, $email);
+    checkEmpties($name, $lastname, $birthdate, $gender, $street, $civicnumber, $nap, $city, $telephone, $email);
 
 
-if(!$v->general($name))
-    $errors[] = array("name", "Inserisci un nome valido!");
-if(!$v->general($lastname))
-    $errors[] = array("lastname", "Inserisci un cognome valido!");
-if(!$v->birthDate($birthdate))
-    $errors[] = array("birthdate", "Inserisci una data di nascita valida!");
-if(!$v->gender($gender))
-    $errors[] = array("gender", "Inserisci un genere valido!");
-if(!$v->general($street))
-    $errors[] = array("street", "Inserisci una via valida!");
-if(!$v->street($civicnumber))
-    $errors[] = array("civicnumber", "Inserisci un numero civico valido!");
-if(!$v->nap($nap))
-    $errors[] = array("nap", "Inserisci un nap valido!");
-if(!$v->general($city))
-    $errors[] = array("city", "Inserisci una città valida!");
-if(!$v->telephone($telephone))
-    $errors[] = array("telephone", "Inserisci un numero di telefono valido!");
-if(!$v->email($email))
-    $errors[] = array("email", "Inserisci un'email valida!");
-if(!$v->textArea($hobby) && strlen($hobby) > 0)
-    $errors[] = array("hobby", "Inserisci una descrizione del tuo hobby valida!");
-if(!$v->textArea($occupation) && strlen($hobby) > 0)
-    $errors[] = array("occupation", "Inserisci una descrizione del tuo lavoro valida!");
-$errorMessage = "Uno o più dati non sono validi!<br>Reindirizzamento in 3 secondi.";
+    if (!$v->general($name))
+        $errors[] = array("name", "Inserisci un nome valido!");
+    if (!$v->general($lastname))
+        $errors[] = array("lastname", "Inserisci un cognome valido!");
+    if (!$v->birthDate($birthdate))
+        $errors[] = array("birthdate", "Inserisci una data di nascita valida!");
+    if (!$v->gender($gender))
+        $errors[] = array("gender", "Inserisci un genere valido!");
+    if (!$v->general($street))
+        $errors[] = array("street", "Inserisci una via valida!");
+    if (!$v->civicnumber($civicnumber))
+        $errors[] = array("civicnumber", "Inserisci un numero civico valido!");
+    if (!$v->nap($nap))
+        $errors[] = array("nap", "Inserisci un nap valido!");
+    if (!$v->general($city))
+        $errors[] = array("city", "Inserisci una città valida!");
+    if (!$v->telephone($telephone))
+        $errors[] = array("telephone", "Inserisci un numero di telefono valido!");
+    if (!$v->email($email))
+        $errors[] = array("email", "Inserisci un'email valida!");
+    if (!$v->textArea($hobby) && strlen($hobby) > 0)
+        $errors[] = array("hobby", "Inserisci una descrizione del tuo hobby valida!");
+    if (!$v->textArea($occupation) && strlen($occupation) > 0)
+        $errors[] = array("occupation", "Inserisci una descrizione del tuo lavoro valida!");
+    $errorMessage = "Uno o più dati non sono validi!<br>Redirezionamento in 3 secondi.";
 
-$status = 0;
-$readData = "";
-if(count($errors) == 0)
+    $readData = "";
+    if (count($errors) == 0) {
+        if (!file_exists(PATH)) {
+            mkdir(PATH, 0777, true);
+        }
+        $globalCsv = new CsvManager(PATH . "/" . $globalFile, ";");
+        $dailyCsv = new CsvManager(PATH . "/" . $dailyFile, ";");
+        if ($globalCsv->writeLine($dataArray) && $dailyCsv->writeLine($dataArray)) {
+            $_SESSION["filled"] = true;
+            header("Location: resoconto.php");
+            exit();
+        } else {
+            $errorMessage = "C'è stato un errore nel salvataggio dei dati, riprova!<br>Redirezionamento in 3 secondi.";
+        }
+    }
+}
+else
 {
-    $path = 'Registrazioni';
-    if (!file_exists($path)) {
-        mkdir($path, 0777, true);
-    }
-    $globalFile = 'Registrazioni_tutte.csv';
-    $dailyFile = 'Registrazione_'.date("Y").'-'.date("m").'-'.date("d").'.csv';
-    $globalCsv = new CsvManager($path."/".$globalFile,";");
-    $dailyCsv = new CsvManager($path."/".$dailyFile,";");
-    if($globalCsv->writeLine($dataArray) && $dailyCsv->writeLine($dataArray)) {
-        $status = 1;
-    }
-    else
-    {
-        $errorMessage = "C'è stato un errore nel salvataggio dei dati, riprova!<br>Reindirizzamento in 3 secondi.";
-    }
+    $dailyCsv = new CsvManager(PATH . "/" . $dailyFile, ";");
     $readData = $dailyCsv->readAll();
 }
-
 function checkEmpties (...$data){
     $ok = true;
     foreach ($data as $d) {
@@ -170,9 +184,10 @@ function checkEmpties (...$data){
         </div>
     </nav>
     <div id="container" class="container center-align">
-        <table>
+        <table id="reportTable">
             <thead>
             <tr>
+                <th>Data di registrazione</th>
                 <th>Nome</th>
                 <th>Cognome</th>
                 <th>Data di nascita</th>
@@ -195,6 +210,7 @@ function checkEmpties (...$data){
                     $counter = 0;
                     foreach($readData as $d) {
                         if($counter++ == 0) continue;
+
                         echo '<tr>';
                         for($x = 0; $x < count($d); $x++)
                         {
@@ -228,7 +244,7 @@ function checkEmpties (...$data){
 <script type="text/javascript" src="assets/js/materialize.min.js"></script>
 <script type="text/javascript" src="assets/js/resoconto.js"></script>
 <?php
-if(count($errors) > 0 || $status == 0) {
+if(count($errors) > 0 || !$filled) {
 ?>
 <form id="hiddenForm" action="registrazione.php" method="post">
     <?php

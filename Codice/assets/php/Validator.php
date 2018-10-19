@@ -127,9 +127,9 @@ class Validator {
 	/**
 	* Metodo di validazione per il numero civico.
 	*/
-	public function street($string)
+	public function civicnumber($string)
 	{
-		if(strlen($string) >= 1 && strlen($string) <= 4 && ctype_alnum($string))
+		if(strlen($string) >= 1 && strlen($string) <= 4 && preg_match("/^[1-9]{1,3}([1-9]|([a-zA-Z]{1}))?$/", $string))
 		{
 			return true;
 		}

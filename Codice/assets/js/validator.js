@@ -129,8 +129,8 @@ var Validator = class Validator {
      * @param string La stringa da controllare.
      * @returns {boolean} {boolean} True se la stringa è valida.
      */
-    street(string) {
-        if (string.length >= 1 && string.length <= 4 && /^[A-Za-z\d]+$/.test(string)) {
+    civicnumber(string) {
+        if (string.length >= 1 && string.length <= 4 && /^[1-9]{1,3}([1-9]|([a-zA-Z]{1}))?$/.test(string)) {
             return true;
         }
         return false;
@@ -157,7 +157,7 @@ var Validator = class Validator {
      * @returns {boolean} {boolean} True se la stringa è valida.
      */
     textArea(string) {
-        if (string.length > 0 && string.length <= 500) {
+        if (string.length > 0 && string.length <= 500 && !/<(.*)>/.test(string)) {
             return this.basic(string);
         }
         return false;

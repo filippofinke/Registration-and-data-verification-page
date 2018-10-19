@@ -128,7 +128,7 @@ function checkEmpties(...$data)
                 <tr>
                     <th>Genere</th>
                     <td>
-                        <?php echo ($gender == "M") ? "Maschio" : "Femmina"; ?>
+                        <?php echo $gender; ?>
                         <input type="hidden" name="gender" value="<?php echo $gender; ?>"/>
                     </td>
                 </tr>
@@ -177,14 +177,14 @@ function checkEmpties(...$data)
                 </tr>
                 <tr>
                     <th>Hobby</th>
-                    <td>
+                    <td id="textArea">
                         <?php echo $hobby; ?>
                         <input type="hidden" name="hobby" value="<?php echo $hobby; ?>"/>
                     </td>
                 </tr>
                 <tr>
                     <th>Professione</th>
-                    <td>
+                    <td id="textArea">
                         <?php echo $occupation; ?>
                         <input type="hidden" name="occupation" value="<?php echo $occupation; ?>"/>
                     </td>

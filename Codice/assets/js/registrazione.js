@@ -86,7 +86,7 @@ function submitCheck(event) {
   var lastname = validator.general($('#lastname').val());
   var street = validator.general($('#street').val());
   var city = validator.general($('#city').val());
-  var civicnumber = validator.street($('#civicnumber').val());
+  var civicnumber = validator.civicnumber($('#civicnumber').val());
   var nap = validator.nap($('#nap').val());
   var telephone = validator.telephone($('#telephone').val());
   var email = validator.email($('#email').val());
@@ -202,12 +202,13 @@ function validatePhone(event) {
 }
 
 function validateNap(event) {
+  event.target.value = event.target.value.trim();
   changeColor(validator.nap(event.target.value), event);
 }
 
 function validateCivicNumber(event) {
-  event.target.value = event.target.value.toUpperCase();
-  changeColor(validator.street(event.target.value), event);
+  event.target.value = event.target.value.toUpperCase().trim();
+  changeColor(validator.civicnumber(event.target.value), event);
 }
 
 function validateGeneral(event) {

@@ -120,13 +120,13 @@ function checkEmpties (...$data){
             <label style="margin-top: -25px;">Genere<b class="required">*</b></label>
             <label>
               <input name="gender" value="M" type="radio" <?php echo (isset($gender) && $gender == "M")?"checked":"" ?>/>
-              <span>Maschio</span>
+              <span>M</span>
             </label>
           </div>
           <div class="input-field col s3">
             <label>
               <input name="gender" value="F" type="radio" <?php echo (isset($gender) && $gender == "F")?"checked":"" ?>/>
-              <span>Femmina</span>
+              <span>F</span>
             </label>
           </div>
         </div>

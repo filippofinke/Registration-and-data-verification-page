@@ -115,3 +115,14 @@ td {
 button:focus {
   background-color: #efefef !important;
 }
+
+#reportTable td {
+  text-align: center;
+  max-width: 150px;
+  overflow-wrap: break-word;
+}
+
+#textArea {
+  max-width: 300px;
+  overflow-wrap: break-word;
+}
