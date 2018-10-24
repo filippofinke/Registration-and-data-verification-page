@@ -48,7 +48,7 @@ body {
 
 .brand-logo {
   left: 0 !important;
-  transform: 0 !important;
+  transform: none !important;
   color: black !important;
   position: relative !important;
   padding: 0px;
@@ -118,7 +118,7 @@ button:focus {
 
 #reportTable td {
   text-align: center;
-  max-width: 150px;
+  max-width: 180px;
   overflow-wrap: break-word;
 }
 

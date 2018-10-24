@@ -48,7 +48,7 @@ if(!$filled) {
         'civicnumber' => $civicnumber,
         'nap' => $nap,
         'city' => $city,
-        'telephone' => str_replace("+", "", $telephone),
+        'telephone' => str_replace(array("+"," "), "", $telephone),
         'email' => $email,
         'hobby' => $hobby,
         'occupation' => $occupation
@@ -212,6 +212,7 @@ function checkEmpties (...$data){
                         if($counter++ == 0) continue;
 
                         echo '<tr>';
+
                         for($x = 0; $x < count($d); $x++)
                         {
                             echo '<td>' . htmlspecialchars($d[$x]) . '</td>';

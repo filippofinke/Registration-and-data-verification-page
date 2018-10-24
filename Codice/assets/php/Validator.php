@@ -109,6 +109,10 @@ class Validator {
 	public function birthDate($date, $format = 'Y-m-d')
 	{
 	    $d = DateTime::createFromFormat($format, $date);
+			$now = new DateTime();
+	    if($d > $now) {
+	       return false;
+			 }
 	    return $d && $d->format($format) === $date;
 	}
 
@@ -117,7 +121,7 @@ class Validator {
 	*/
 	public function general($string)
 	{
-		if(strlen($string) <= 50 && preg_match("/^[a-zA-ZÀ-ÿ\x{00f1}\x{00d1}\s]*$/u", $string))
+		if(strlen($string) <= 50 && preg_match("/^[a-zA-ZÀ-ÿ\x{00f1}\x{00d1}\s]+([.-]{1}[a-zA-ZÀ-ÿ\x{00f1}\x{00d1}\s]+)?$/u", $string))
 		{
 		    return $this->basic($string);
 		}

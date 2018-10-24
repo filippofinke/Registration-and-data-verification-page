@@ -36,6 +36,8 @@ class CsvManager {
      */
     function writeLine($line)
     {
+        $line = str_replace("\r\n", " ", $line);
+        $line = str_replace("\n", " ", $line);
         $file = $this->path;
         if(!file_exists($file))
         {
@@ -85,6 +87,7 @@ class CsvManager {
             {
                 while (($data = fgetcsv($f, 1000, $this->delimiter)) !== FALSE)
                 {
+                    if($data == null) continue;
                     $csvArray[] = $data;
                 }
                 fclose($f);

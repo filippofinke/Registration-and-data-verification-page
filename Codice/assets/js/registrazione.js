@@ -190,6 +190,8 @@ function validateBirthDate(event) {
 }
 
 function validateTextArea(event) {
+  console.log(event.target.value);
+  event.target.value = event.target.value.replace(/\n/g," ");
   changeColor(validator.textArea(event.target.value), event);
 }
 

@@ -1,3 +1,8 @@
+/**
+* Classe Validator.
+* @author Filippo Finke
+* @version 24.10.2018
+*/
 var Validator = class Validator {
 
     /**
@@ -105,6 +110,9 @@ var Validator = class Validator {
         if (Number.isNaN(d.getTime())) {
             return false;
         }
+        if(d > new Date())
+          return false;
+
         return d.toISOString().slice(0, 10) === string;
     }
 
@@ -116,7 +124,8 @@ var Validator = class Validator {
      * @returns {boolean} {boolean} True se la stringa è valida.
      */
     general(string) {
-        if (string.length <= 50 && /^[a-zA-ZÀ-ÿ\u00f1\u00d1\s]*$/g.test(string)) {
+        if (string.length <= 50 &&
+          /^[a-zA-ZÀ-ÿ\u00f1\u00d1\s]+([.-]{1})?([a-zA-ZÀ-ÿ\u00f1\u00d1\s]+)?$/g.test(string)) {
             return this.basic(string);
         }
         return false;
