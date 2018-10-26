@@ -1,8 +1,9 @@
 <?php
 
-if ($_SERVER["REQUEST_METHOD"] != "POST")
-    header("Location: registrazione.php");
-
+if ($_SERVER["REQUEST_METHOD"] != "POST") {
+    header("Location: index.html");
+    exit;
+}
 
 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 $name = $_POST["name"];
@@ -215,6 +216,7 @@ function checkEmpties(...$data)
     }
     ?>
 </form>
+<script type="text/javascript" src="assets/js/preventBackHistory.js"></script>
 <script type="text/javascript" src="assets/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="assets/js/materialize.min.js"></script>
 <script type="text/javascript" src="assets/js/controllo.js"></script>
