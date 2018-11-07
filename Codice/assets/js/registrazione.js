@@ -1,3 +1,7 @@
+/**
+* @author Filippo Finke
+* @version 07.11.2018
+*/
 var validator = new Validator();
 var datepicker;
 $(document).ready(function() {
@@ -23,6 +27,15 @@ $(document).ready(function() {
     datepicker.open();
   });
 
+  document.onkeydown = function(event){
+	  if(event.code == "Enter")
+	  {
+		  event.preventDefault();
+		  $('#submitButton').click();
+	  }
+  };
+
+  
   $('#submitButton').click(submitCheck);
   $('#resetButton').click(resetForm);
 
@@ -190,7 +203,6 @@ function validateBirthDate(event) {
 }
 
 function validateTextArea(event) {
-  console.log(event.target.value);
   event.target.value = event.target.value.replace(/\n/g," ");
   changeColor(validator.textArea(event.target.value), event);
 }

@@ -85,7 +85,7 @@ class CsvManager {
             $csvArray = [];
             if (($f = fopen($file,'r')) !== FALSE)
             {
-                while (($data = fgetcsv($f, 1000, $this->delimiter)) !== FALSE)
+                while (($data = fgetcsv($f, 100000, $this->delimiter)) !== FALSE)
                 {
                     if($data == null) continue;
                     $csvArray[] = $data;

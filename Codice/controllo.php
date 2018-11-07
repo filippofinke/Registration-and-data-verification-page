@@ -6,18 +6,18 @@ if ($_SERVER["REQUEST_METHOD"] != "POST") {
 }
 
 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-$name = $_POST["name"];
-$lastname = $_POST["lastname"];
-$birthdate = $_POST["birthdate"];
-$gender = $_POST["gender"];
-$street = $_POST["street"];
-$civicnumber = $_POST["civicnumber"];
-$nap = $_POST["nap"];
-$city = $_POST["city"];
-$telephone = $_POST["telephone"];
-$email = $_POST["email"];
-$hobby = $_POST["hobby"];
-$occupation = $_POST["occupation"];
+$name = htmlspecialchars($_POST["name"]);
+$lastname = htmlspecialchars($_POST["lastname"]);
+$birthdate = htmlspecialchars($_POST["birthdate"]);
+$gender = htmlspecialchars($_POST["gender"]);
+$street = htmlspecialchars($_POST["street"]);
+$civicnumber = htmlspecialchars($_POST["civicnumber"]);
+$nap = htmlspecialchars($_POST["nap"]);
+$city = htmlspecialchars($_POST["city"]);
+$telephone = htmlspecialchars($_POST["telephone"]);
+$email = htmlspecialchars($_POST["email"]);
+$hobby = htmlspecialchars($_POST["hobby"]);
+$occupation = htmlspecialchars($_POST["occupation"]);
 
 checkEmpties($name, $lastname, $birthdate, $gender, $street, $civicnumber, $nap, $city, $telephone, $email);
 
@@ -39,6 +39,10 @@ function checkEmpties(...$data)
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link type="text/css" rel="stylesheet" href="assets/css/materialize.min.css"/>
     <link type="text/css" rel="stylesheet" href="assets/css/main.css"/>
+	<link rel="icon" href="assets/media/img/icon.png" type="image/png">
+	<meta name="description" content="Filippo Finke's Garage">
+	<meta name="author" content="Filippo Finke">
+	<meta name="keywords" content="samt">
     <title>Filippo Finke</title>
 </head>
 <body>
@@ -96,7 +100,7 @@ function checkEmpties(...$data)
 <div id="mainPage" style="display:none;">
     <nav>
         <div class="nav-wrapper">
-            <a href="#" class="brand-logo">Finke's Garage</a>
+            <a href="index.html" class="brand-logo">Finke's Garage</a>
         </div>
     </nav>
     <div id="container" class="container center-align">
@@ -207,12 +211,14 @@ function checkEmpties(...$data)
             </div>
         </div>
     </div>
+	<div class="separator">
+    </div>
     <div class="footer"><strong>Filippo Finke</strong> I3AC - 2018</div>
 </div>
 <form id="hiddenForm" action="registrazione.php" method="post">
     <?php
-    foreach ($_POST as $a => $b) {
-        echo '<input type="hidden" name="' . htmlspecialchars($a) . '" value="' . htmlspecialchars($b) . '">';
+    foreach ($_POST as $field => $value) {
+        echo '<input type="hidden" name="' . htmlspecialchars($field) . '" value="' . htmlspecialchars($value) . '">';
     }
     ?>
 </form>

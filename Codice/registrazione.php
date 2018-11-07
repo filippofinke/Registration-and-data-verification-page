@@ -41,6 +41,10 @@ function checkEmpties (...$data){
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link type="text/css" rel="stylesheet" href="assets/css/materialize.min.css"/>
   <link type="text/css" rel="stylesheet" href="assets/css/main.css"/>
+  <link rel="icon" href="assets/media/img/icon.png" type="image/png">
+  <meta name="description" content="Filippo Finke's Garage">
+  <meta name="author" content="Filippo Finke">
+  <meta name="keywords" content="samt">
   <title>Filippo Finke</title>
 </head>
 <body>
@@ -90,7 +94,7 @@ function checkEmpties (...$data){
   <div id="mainPage" style="display:none;">
     <nav>
       <div class="nav-wrapper">
-        <a href="#" class="brand-logo">Finke's Garage</a>
+        <a href="index.html" class="brand-logo">Finke's Garage</a>
       </div>
     </nav>
     <div id="container" class="container center-align">
@@ -190,18 +194,18 @@ function checkEmpties (...$data){
         <?php echo $message; ?>
         <div class="row">
           <div class="input-field col s6">
-            <button class="btn btn-large btn-register waves-effect waves-light btn-color" id="resetButton">Cancella
+            <button class="btn btn-large waves-effect waves-light btn-color" id="resetButton">Cancella
               <i class="material-icons left">cancel</i>
             </button>
           </div>
           <div class="input-field col s6">
-            <button id="submitButton" class="btn btn-large btn-register waves-effect waves-light btn-color">Avanti
+            <button type="submit" id="submitButton" class="btn btn-large btn-register waves-effect waves-light btn-color">Avanti
               <i class="material-icons left">send</i>
             </button>
           </div>
         </div>
       </form>
-      <p>I campi con * sono obbligatori</p>
+      <p>I campi con <b class="required">*</b> sono obbligatori</p>
     </div>
     <div class="separator">
     </div>

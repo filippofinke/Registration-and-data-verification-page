@@ -4,9 +4,9 @@ require_once 'assets/php/CsvManager.php';
 require_once 'assets/php/Validator.php';
 
 
-define("PATH",'Registrazioni');
-$globalFile = 'Registrazioni_tutte.csv';
-$dailyFile = 'Registrazione_' . date("Y") . '-' . date("m") . '-' . date("d") . '.csv';
+define('PATH','Registrazioni');
+define('GLOBAL_FILE', 'Registrazioni_tutte.csv');
+define('DAILY_FILE', 'Registrazione_' . date("Y") . '-' . date("m") . '-' . date("d") . '.csv');
 
 $filled = false;
 if(isset($_SESSION["filled"]))
@@ -88,8 +88,8 @@ if(!$filled) {
         if (!file_exists(PATH)) {
             mkdir(PATH, 0777, true);
         }
-        $globalCsv = new CsvManager(PATH . "/" . $globalFile, ";");
-        $dailyCsv = new CsvManager(PATH . "/" . $dailyFile, ";");
+        $globalCsv = new CsvManager(PATH . "/" . GLOBAL_FILE, ";");
+        $dailyCsv = new CsvManager(PATH . "/" . DAILY_FILE, ";");
         if ($globalCsv->writeLine($dataArray) && $dailyCsv->writeLine($dataArray)) {
             $_SESSION["filled"] = true;
             header("Location: resoconto.php");
@@ -101,7 +101,7 @@ if(!$filled) {
 }
 else
 {
-    $dailyCsv = new CsvManager(PATH . "/" . $dailyFile, ";");
+    $dailyCsv = new CsvManager(PATH . "/" . DAILY_FILE, ";");
     $readData = $dailyCsv->readAll();
 }
 function checkEmpties (...$data){
@@ -123,6 +123,10 @@ function checkEmpties (...$data){
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link type="text/css" rel="stylesheet" href="assets/css/materialize.min.css"/>
     <link type="text/css" rel="stylesheet" href="assets/css/main.css"/>
+	<link rel="icon" href="assets/media/img/icon.png" type="image/png">
+	<meta name="description" content="Filippo Finke's Garage">
+	<meta name="author" content="Filippo Finke">
+	<meta name="keywords" content="samt">
     <title>Filippo Finke</title>
 </head>
 <body>
@@ -180,11 +184,11 @@ function checkEmpties (...$data){
 <div id="mainPage" style="display:none;">
     <nav>
         <div class="nav-wrapper">
-            <a href="#" class="brand-logo">Finke's Garage</a>
+            <a href="index.html" class="brand-logo">Finke's Garage</a>
         </div>
     </nav>
-    <div id="container" class="container center-align">
-        <table id="reportTable">
+    <div id="container" class="center-align">
+        <table id="reportTable" class="responsive-table">
             <thead>
             <tr>
                 <th>Data di registrazione</th>
@@ -212,10 +216,9 @@ function checkEmpties (...$data){
                         if($counter++ == 0) continue;
 
                         echo '<tr>';
-
-                        for($x = 0; $x < count($d); $x++)
+                        foreach($d as $key=>$field)
                         {
-                            echo '<td>' . htmlspecialchars($d[$x]) . '</td>';
+                            echo '<td class=".field'.$key.'">' . htmlspecialchars($field) . '</td>';
                         }
                         echo '</tr>';
                     }
@@ -239,6 +242,8 @@ function checkEmpties (...$data){
             </div>
         </div>
     </div>
+	<div class="separator">
+    </div>
     <div class="footer"><strong>Filippo Finke</strong> I3AC - 2018</div>
 </div>
 <script type="text/javascript" src="assets/js/preventBackHistory.js"></script>
@@ -246,7 +251,7 @@ function checkEmpties (...$data){
 <script type="text/javascript" src="assets/js/materialize.min.js"></script>
 <script type="text/javascript" src="assets/js/resoconto.js"></script>
 <?php
-if(count($errors) > 0 || !$filled) {
+if(isset($errors) && count($errors) > 0 || !$filled) {
 ?>
 <form id="hiddenForm" action="registrazione.php" method="post">
     <?php
