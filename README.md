@@ -1,21 +1,28 @@
 ### Progetto 1
-# Test
+## Sito web con pagina di registrazione e verifica dati
 > Prova di cambiamento file :D
 
-## Prove
-- Elenco
-- Elenco
+#### Struttura:
+- [Codice](Codice)
+- [Diari](Diari)
+- [Documentazione](Documentazione)
+- [Presentazione](Presentazione)
 
-``Testing tag``
+├───Codice ```Cartella nel quale si trova il codice.```<br>
+│   ├───assets<br>
+│   │   ├───css<br>
+│   │   ├───fonts<br>
+│   │   ├───js<br>
+│   │   ├───media<br>
+│   │   │   └───img<br>
+│   │   └───php<br>
+│   └───Registrazioni<br>
+├───Diari ```Cartella nel quale si trovano i diari.```<br>
+├───Documentazione ```Cartella nel quale si trova la documentazione.```<br>
+├───DrawioXML ```Cartella nel quale si trovano i progetti del sito Draw.io```<br>
+├───GANTT ```Cartella nel quale si trovano i GANTT.```<br>
+├───Immagini ```Cartella nel quale si trovano tutte le immagini utilizzate.```<br>
+└───Presentazione ```Cartella nel quale si trova la presentazione.```<br>
 
-[TestLink](README.md)
 
-
-Filippo Finke
-
-| Test        | Test           |
-| ------------- |:-------------:|
-| Test      | Test |
-
-
-> Test edit web
+> Autore: Filippo Finke
