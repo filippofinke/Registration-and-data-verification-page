@@ -1,0 +1,9 @@
+date;name;lastname;birthdate;gender;street;civicnumber;nap;city;telephone;email;hobby;occupation
+2018-11-09 11:23:54;Luca;Rossi;1990-11-01;M;Trevano;1A;6900;Lugano;410917899989;luca.rossi@gmail.com;;
+2018-11-09 11:43:56;Matan;Rossi;2000-11-03;M;Scuola;10A;6900;Lugano;41091786623;matan.rossi@gmail.com;Calcio;
+2018-11-09 11:45:04;Paolo;Claudio;1990-11-02;M;Montagna;12B;6768;Mendrisio;09167888232;paolo.claudio@gmail.com;;
+2018-11-09 12:05:38;Mucca;Rosa;1993-09-09;F;Farm;1C;92929;Fattoria;0916788812;mucca.rosa@fattoria.com;Pascolare;Fare la mucca
+2018-11-09 12:07:01;Lucia;Bianchi;2002-05-07;F;Scuola;13;7278;Chiasso;0766788878;lucia.bianchi@chiasso.ch;;
+2018-11-09 12:09:18;Maria;Rossi;1990-11-08;F;Cave di marmo;4;2345;Arzo;07888723762;maria.rossi@hobby.com;Scavatrice;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas tristique mauris mauris, ut sollicitudin lacus viverra a. Pellentesque at finibus mauris. Curabitur non ipsum porttitor, lobortis mauris sed, venenatis metus. Cras ac sapien nec sapien imperdiet placerat. Suspendisse urna dui, commodo a augue at, varius venenatis arcu. Aliquam urna magna, rhoncus nec vestibulum et, convallis ac dui. Aenean odio libero, egestas ac nulla in, hendrerit bibendum dui. Nam a erat nec eros tincidunt veh.
+2018-11-09 12:11:54;Andrea J.Bet;Viola;1990-01-20;F;Monza;9B;1234;Monza;09178892929;monzaofficial@moto.it;;
+2018-11-09 12:13:30;Ms. McGray;Demba;1965-11-26;F;Scuola;1A;1991;Locarno;0917899898;grycomp@gmail.com;Leggere;Sono una segretaria.

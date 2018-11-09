@@ -139,7 +139,7 @@ var Validator = class Validator {
      * @returns {boolean} {boolean} True se la stringa è valida.
      */
     civicnumber(string) {
-        if (string.length >= 1 && string.length <= 4 && /^[1-9]{1,3}([1-9]|([a-zA-Z]{1}))?$/.test(string)) {
+        if (string.length >= 1 && string.length <= 4 && /^[0-9]{1,3}([0-9]|([a-zA-Z]{1}))?$/.test(string)) {
             return true;
         }
         return false;
