@@ -1,6 +1,5 @@
 ### Progetto 1
 ## Sito web con pagina di registrazione e verifica dati
-> Prova di cambiamento file :D
 
 #### Struttura:
 - [Codice](Codice)
